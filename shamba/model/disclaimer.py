@@ -1,4 +1,4 @@
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui
 
 from shamba.gui.translate_ import translate_ as _
 from shamba.gui import designer
@@ -16,16 +16,16 @@ The SHAMBA tool should be used in conjunction with the SHAMBA tool user guide. U
 This tool has been prepared for general guidance on matters of interest only, and does not constitute professional advice. You should not act upon the information contained in this tool without obtaining specific professional advice. No representation or warranty (express or implied) is given as to the accuracy or completeness of the information contained in this tool, and, to the extent permitted by law, the authors, publishers and distributors of this tool do not accept or assume any liability, responsibility or duty of care for any consequences of you or anyone else acting, or refraining to act, in reliance on the information contained in this tool or for any decision based on it.
 """
 
-class DisclaimerDialog(QtGui.QDialog):
+class DisclaimerDialog(QtWidgets.QDialog):
 
     def __init__(self, parent=None):
-        QtGui.QWidget.__init__(self, parent)
+        QtWidgets.QWidget.__init__(self, parent)
         self.ui = Ui_Disclaimer()
         self.ui.setupUi(self)
      
         designer_dir = os.path.dirname(os.path.abspath(designer.__file__))
         image_dir = os.path.join(designer_dir, 'splash.jpg')
-        pix = QtGui.QPixmap(image_dir)
+        pix = QtWidgets.QPixmap(image_dir)
         self.ui.splashImage.setPixmap(pix.scaled(self.ui.splashImage.size(),QtCore.Qt.KeepAspectRatio))
         self.ui.disclaimerText.setText(_(DISCLAIMER))
 
@@ -34,7 +34,7 @@ class DisclaimerDialog(QtGui.QDialog):
 
 if __name__ == "__main__":
     import sys
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     myapp = DisclaimerDialog()
     myapp.show()
     sys.exit(app.exec_())

@@ -3,13 +3,13 @@
 """ Contains classes for all the setup of the page widgets."""
 
 import os
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 from shamba.gui.translate_ import translate_ as _
 from shamba.model import cfg
 from .page_change import PageComplete, NextBackButtons
 
-class GenericDialog(QtGui.QDialog):
+class GenericDialog(QtWidgets.QDialog):
     """
     Parent class for the dialogs in the SHAMBA tool.
 
@@ -44,26 +44,26 @@ class GenericDialog(QtGui.QDialog):
     def mousePressEvent(self, event):
         """ Override mousePressEvent so field is cleared when a 
         non-widget item in the window is clicked."""
-        focusedWidget = QtGui.QApplication.focusWidget()
+        focusedWidget = QtWidgets.QApplication.focusWidget()
         if focusedWidget is not None:
             focusedWidget.clearFocus()
-        QtGui.QDialog.mousePressEvent(self, event)
+        QtWidgets.QDialog.mousePressEvent(self, event)
  
     def browse_for_file(self, lineEdit):
         """Open a QFileDialog and show the chosen path in lineEdit."""
-        filename = QtGui.QFileDialog.getOpenFileName(
+        filename = QtWidgets.QFileDialog.getOpenFileName(
                 self, _('Open File'), 
                 os.path.abspath(cfg.PROJ_DIR),
                 _("CSV files (*.csv)")
         )
         if filename:    # not cancelled
-            lineEdit.setText(filename)
+            lineEdit.setText(filename[0])
 
     def browse_for_dir(self, lineEdit):
         """Open a QFileDialog.getExistingDirectory and show chosen dir in 
         lineEdit.
         """
-        dirname = QtGui.QFileDialog.getExistingDirectory(
+        dirname = QtWidgets.QFileDialog.getExistingDirectory(
                 self, _('Select Folder'),
                 os.path.abspath(cfg.PROJ_DIR),
         )
@@ -82,7 +82,7 @@ class GenericDialog(QtGui.QDialog):
         except KeyError:
             text = "No help available."
         
-        help_dialog = QtGui.QMessageBox(page.parent())
+        help_dialog = QtWidgets.QMessageBox(page.parent())
         help_dialog.setModal(False)
         help_dialog.setWindowTitle(_("Help"))
         help_dialog.setText(_(text))
@@ -110,7 +110,7 @@ class GenericDialog(QtGui.QDialog):
         after closing.
         """
         ret = self.show_sure_dialog()
-        if ret == QtGui.QMessageBox.Yes: # user sure about closing
+        if ret == QtWidgets.QMessageBox.Yes: # user sure about closing
             event.accept()
         else:
             event.ignore()
@@ -118,19 +118,19 @@ class GenericDialog(QtGui.QDialog):
     def show_sure_dialog(self):
         """Popup dialog that shows on a close event."""
        
-        popup = QtGui.QMessageBox(self)
+        popup = QtWidgets.QMessageBox(self)
         popup.setWindowTitle(_("Exit the dialog?"))
         popup.setText(_(
                 "Are you sure you wish to exit this form? "
                 "\nAll information entered will be lost."
         ))
         popup.setStandardButtons(
-                QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
+                QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
         
         ret = popup.exec_()
         return ret
 
-class GenericPage(QtGui.QWidget):
+class GenericPage(QtWidgets.QWidget):
     """
     Object to handle all the things pertaining 
     to a particular page in the stackedWidget 
@@ -270,13 +270,13 @@ class GenericPage(QtGui.QWidget):
                 else:
                     object_.hide()
 
-            if isinstance(toggler, QtGui.QRadioButton):
+            if isinstance(toggler, QtWidgets.QRadioButton):
                 for object_ in toToggle[toggler]:
                     if disable:
                         toggler.toggled.connect(object_.setEnabled)
                     else:
                         toggler.toggled.connect(object_.setVisible)
-            elif isinstance(toggler, QtGui.QComboBox):
+            elif isinstance(toggler, QtWidgets.QComboBox):
                 # always last option in combobox that does the toggling
                 toggler.currentIndexChanged.connect(
                         lambda: show_if_last_item(
@@ -285,7 +285,7 @@ class GenericPage(QtGui.QWidget):
                                         toToggle[toggler]
                         )
                 )
-            elif isinstance(toggler, QtGui.QSpinBox):
+            elif isinstance(toggler, QtWidgets.QSpinBox):
                 toggler.valueChanged.connect(
                         lambda: show_if_nonzero(
                                         toggler.value(),
@@ -302,7 +302,7 @@ class GenericPage(QtGui.QWidget):
 
         bg = []   # to hold names of button groups
         for group in buttonGroups:
-            bg.append(QtGui.QButtonGroup())
+            bg.append(QtWidgets.QButtonGroup())
             for button in group:
                 bg[-1].addButton(button)
 

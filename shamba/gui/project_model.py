@@ -9,7 +9,7 @@ import logging as log
 import shutil
 import numpy as np
 
-from PyQt4 import QtGui, QtCore
+from PyQt5 import QtGui, QtCore
 
 from shamba.model import cfg, io_
 from shamba.model.soil_params import SoilParams

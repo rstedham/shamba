@@ -7,7 +7,7 @@
 import os
 from shamba.model import cfg
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 from shamba.gui.translate_ import translate_ as _
 from shamba.gui.designer.project_dialog_ui import Ui_project
 from shamba.gui.page_change import NextBackButtons
@@ -107,11 +107,11 @@ class ProjectDialog(GenericDialog, Ui_project):
         # toggle the mort amount box a couple times so that
         # the fields on that page are shown correctly
         pages = [
-                self.findChild(QtGui.QWidget, "treeMortPage_"+str(i))
+                self.findChild(QtWidgets.QWidget, "treeMortPage_"+str(i))
                 for i in range(self.treeNum.maximum())
         ]
         for i, p in enumerate(pages):
-            mort_rate_box = p.findChild(QtGui.QSpinBox, "treesDead_"+str(i))
+            mort_rate_box = p.findChild(QtWidgets.QSpinBox, "treesDead_"+str(i))
             mort_rate_box.setValue(0)
             mort_rate_box.setValue(1)
 
@@ -236,7 +236,7 @@ class ProjectDialog(GenericDialog, Ui_project):
         
         pages = []
         pages = [
-                self.findChild(QtGui.QWidget, "cropMgmtPage_"+str(i))
+                self.findChild(QtWidgets.QWidget, "cropMgmtPage_"+str(i))
                 for i in range(self.cropNum.maximum())
         ]       
         # store lists of widgets
@@ -259,19 +259,19 @@ class ProjectDialog(GenericDialog, Ui_project):
 
             # make widget lists
             self.crop_type.append(
-                    p.findChild(QtGui.QComboBox, "cropType_"+str(i))
+                    p.findChild(QtWidgets.QComboBox, "cropType_"+str(i))
             )
             self.crop_yield.append(
-                    p.findChild(QtGui.QDoubleSpinBox, "cropYield_"+str(i))
+                    p.findChild(QtWidgets.QDoubleSpinBox, "cropYield_"+str(i))
             )
             self.crop_leftinfield.append(
-                    p.findChild(QtGui.QSpinBox, "leftInField_"+str(i))
+                    p.findChild(QtWidgets.QSpinBox, "leftInField_"+str(i))
             )
             self.crop_burnyes.append(
-                    p.findChild(QtGui.QRadioButton, "cropBurnYes_"+str(i))
+                    p.findChild(QtWidgets.QRadioButton, "cropBurnYes_"+str(i))
             )
             self.crop_burnno.append(
-                    p.findChild(QtGui.QRadioButton, "cropBurnNo_"+str(i))
+                    p.findChild(QtWidgets.QRadioButton, "cropBurnNo_"+str(i))
             )            
 
 
@@ -282,14 +282,14 @@ class ProjectDialog(GenericDialog, Ui_project):
 
             # toggle
             toggle_lst = [
-                    p.findChild(QtGui.QLabel, "cropCsvLabel_"+str(i)),
-                    p.findChild(QtGui.QLabel, "cropInputType_"+str(i)),
-                    p.findChild(QtGui.QLineEdit, "cropCsvBrowseBox_"+str(i)),
+                    p.findChild(QtWidgets.QLabel, "cropCsvLabel_"+str(i)),
+                    p.findChild(QtWidgets.QLabel, "cropInputType_"+str(i)),
+                    p.findChild(QtWidgets.QLineEdit, "cropCsvBrowseBox_"+str(i)),
                     p.findChild(
-                            QtGui.QPushButton, "cropCsvBrowseButton_"+str(i)),
+                            QtWidgets.QPushButton, "cropCsvBrowseButton_"+str(i)),
                     p.findChild(
-                            QtGui.QRadioButton, "cropCustomButton_"+str(i)),
-                    p.findChild(QtGui.QRadioButton, "cropCsvButton_"+str(i)),
+                            QtWidgets.QRadioButton, "cropCustomButton_"+str(i)),
+                    p.findChild(QtWidgets.QRadioButton, "cropCsvButton_"+str(i)),
             ]
             self.toToggle[p] = {self.crop_type[i]: toggle_lst}
             
@@ -303,7 +303,7 @@ class ProjectDialog(GenericDialog, Ui_project):
     def _setup_treeMgmt_pages(self):
         
         pages = [
-                self.findChild(QtGui.QWidget, "treeMgmtPage_"+str(i))
+                self.findChild(QtWidgets.QWidget, "treeMgmtPage_"+str(i))
                 for i in range(self.treeNum.maximum())
         ]
         self.tree_name,self.tree_type = [],[]
@@ -320,16 +320,16 @@ class ProjectDialog(GenericDialog, Ui_project):
 
             # list of widgets
             self.tree_name.append(
-                    p.findChild(QtGui.QLineEdit, "speciesName_"+str(i))
+                    p.findChild(QtWidgets.QLineEdit, "speciesName_"+str(i))
             )
             self.tree_type.append(
-                    p.findChild(QtGui.QComboBox, "treeType_"+str(i))
+                    p.findChild(QtWidgets.QComboBox, "treeType_"+str(i))
             )
             self.tree_standdens.append(
-                    p.findChild(QtGui.QSpinBox, "standDens_"+str(i))
+                    p.findChild(QtWidgets.QSpinBox, "standDens_"+str(i))
             )
             self.tree_yearplanted.append(
-                    p.findChild(QtGui.QSpinBox, "yearPlanted_"+str(i))
+                    p.findChild(QtWidgets.QSpinBox, "yearPlanted_"+str(i))
             )
             
             self.toComplete[p] = [
@@ -339,14 +339,14 @@ class ProjectDialog(GenericDialog, Ui_project):
 
             # toggle
             toggle_lst = [
-                    p.findChild(QtGui.QLabel, "treeInputType_"+str(i)),
-                    p.findChild(QtGui.QRadioButton, "treeCsvButton_"+str(i)),
+                    p.findChild(QtWidgets.QLabel, "treeInputType_"+str(i)),
+                    p.findChild(QtWidgets.QRadioButton, "treeCsvButton_"+str(i)),
                     p.findChild(
-                            QtGui.QRadioButton, "treeCustomButton_"+str(i)),
-                    p.findChild(QtGui.QLabel, "treeCsvLabel_"+str(i)),
-                    p.findChild(QtGui.QLineEdit, "treeCsvBrowseBox_"+str(i)),
+                            QtWidgets.QRadioButton, "treeCustomButton_"+str(i)),
+                    p.findChild(QtWidgets.QLabel, "treeCsvLabel_"+str(i)),
+                    p.findChild(QtWidgets.QLineEdit, "treeCsvBrowseBox_"+str(i)),
                     p.findChild(
-                            QtGui.QPushButton, "treeCsvBrowseButton_"+str(i)),
+                            QtWidgets.QPushButton, "treeCsvBrowseButton_"+str(i)),
             ]
             self.toToggle[p] = {self.tree_type[i]: toggle_lst}
 
@@ -356,7 +356,7 @@ class ProjectDialog(GenericDialog, Ui_project):
     def _setup_treeThin_pages(self):
        
         pages = [
-                self.findChild(QtGui.QWidget, "treeThinPage_"+str(i))
+                self.findChild(QtWidgets.QWidget, "treeThinPage_"+str(i))
                 for i in range(self.treeNum.maximum())
         ]
         self.thin_neverbut, self.thin_intervalbut = [], []
@@ -376,28 +376,28 @@ class ProjectDialog(GenericDialog, Ui_project):
             ))
 
             self.thin_custombut.append(
-                    p.findChild(QtGui.QRadioButton, "thinCustom_"+str(i))
+                    p.findChild(QtWidgets.QRadioButton, "thinCustom_"+str(i))
             )
             self.thin_intervalbut.append(
-                    p.findChild(QtGui.QRadioButton, "thinInterval_"+str(i))
+                    p.findChild(QtWidgets.QRadioButton, "thinInterval_"+str(i))
             )
             self.thin_neverbut.append(
-                    p.findChild(QtGui.QRadioButton, "thinNever_"+str(i))
+                    p.findChild(QtWidgets.QRadioButton, "thinNever_"+str(i))
             )
             self.thin_customline.append(
-                    p.findChild(QtGui.QLineEdit, "thinCustomLine_"+str(i))
+                    p.findChild(QtWidgets.QLineEdit, "thinCustomLine_"+str(i))
             )
             self.thin_freq.append(
-                    p.findChild(QtGui.QSpinBox, "thinFreq_"+str(i))
+                    p.findChild(QtWidgets.QSpinBox, "thinFreq_"+str(i))
             )
             self.thin_amount.append(
-                    p.findChild(QtGui.QSpinBox, "treesThinned_"+str(i))
+                    p.findChild(QtWidgets.QSpinBox, "treesThinned_"+str(i))
             )
             self.thin_stemsleft.append(
-                    p.findChild(QtGui.QSpinBox, "thinnedStemsLeft_"+str(i))
+                    p.findChild(QtWidgets.QSpinBox, "thinnedStemsLeft_"+str(i))
             )
             self.thin_branchesleft.append(
-                    p.findChild(QtGui.QSpinBox,"thinnedBranchesLeft_"+str(i)),
+                    p.findChild(QtWidgets.QSpinBox,"thinnedBranchesLeft_"+str(i)),
             )
             
             self.toCompleteConditional[p] = [
@@ -410,9 +410,9 @@ class ProjectDialog(GenericDialog, Ui_project):
             self.spinboxesToShowPage[p] = [(self.treeNum, i+1)]
 
             # button groups
-            never_but = p.findChild(QtGui.QRadioButton,
+            never_but = p.findChild(QtWidgets.QRadioButton,
                                 "thinNever_"+str(i))
-            interval_but = p.findChild(QtGui.QRadioButton,
+            interval_but = p.findChild(QtWidgets.QRadioButton,
                                    "thinInterval_"+str(i))
             self.buttonGroups[p] = [
                     [self.thin_neverbut[i], self.thin_intervalbut[i], 
@@ -422,22 +422,22 @@ class ProjectDialog(GenericDialog, Ui_project):
             # toggle
             toggle_lst = [
                     self.thin_amount[i],
-                    p.findChild(QtGui.QLabel, "treesThinnedText_"+str(i)),
-                    p.findChild(QtGui.QLabel, "treesThinnedLabel_"+str(i)),
-                    p.findChild(QtGui.QLabel, "thinnedLeftText_"+str(i)),
+                    p.findChild(QtWidgets.QLabel, "treesThinnedText_"+str(i)),
+                    p.findChild(QtWidgets.QLabel, "treesThinnedLabel_"+str(i)),
+                    p.findChild(QtWidgets.QLabel, "thinnedLeftText_"+str(i)),
                     self.thin_stemsleft[i],
-                    p.findChild(QtGui.QLabel, "thinnedStemsLeftText_"+str(i)),
+                    p.findChild(QtWidgets.QLabel, "thinnedStemsLeftText_"+str(i)),
                     p.findChild(
-                            QtGui.QLabel, "thinnedStemsLeftLabel_"+str(i)),
+                            QtWidgets.QLabel, "thinnedStemsLeftLabel_"+str(i)),
                     self.thin_branchesleft[i],
                     p.findChild(
-                            QtGui.QLabel, "thinnedBranchesLeftText_"+str(i)),
+                            QtWidgets.QLabel, "thinnedBranchesLeftText_"+str(i)),
                     p.findChild(
-                            QtGui.QLabel,"thinnedBranchesLeftLabel_"+str(i)),
+                            QtWidgets.QLabel,"thinnedBranchesLeftLabel_"+str(i)),
             ]
             toggle_lst_custom = [
                     self.thin_customline[i],
-                    p.findChild(QtGui.QLabel,
+                    p.findChild(QtWidgets.QLabel,
                                 "thinCustomText_"+str(i)),
             ]
             
@@ -454,7 +454,7 @@ class ProjectDialog(GenericDialog, Ui_project):
     def _setup_treeMort_pages(self):
         
         pages = [
-                self.findChild(QtGui.QWidget, "treeMortPage_"+str(i))
+                self.findChild(QtWidgets.QWidget, "treeMortPage_"+str(i))
                 for i in range(self.treeNum.maximum())
         ]
         self.mort_amount = []
@@ -470,13 +470,13 @@ class ProjectDialog(GenericDialog, Ui_project):
             ))
 
             self.mort_amount.append(
-                    p.findChild(QtGui.QSpinBox, "treesDead_"+str(i))
+                    p.findChild(QtWidgets.QSpinBox, "treesDead_"+str(i))
             )
             self.mort_stemsleft.append(
-                    p.findChild(QtGui.QSpinBox, "deadStemsLeft_"+str(i))
+                    p.findChild(QtWidgets.QSpinBox, "deadStemsLeft_"+str(i))
             )
             self.mort_branchesleft.append(
-                    p.findChild(QtGui.QSpinBox, "deadBranchesLeft_"+str(i))
+                    p.findChild(QtWidgets.QSpinBox, "deadBranchesLeft_"+str(i))
             )
 
             # show/hide page
@@ -484,17 +484,17 @@ class ProjectDialog(GenericDialog, Ui_project):
         
             # toggle
             toggle_lst = [
-                    p.findChild(QtGui.QLabel,
+                    p.findChild(QtWidgets.QLabel,
                                 "deadLeftText_"+str(i)),
                     self.mort_stemsleft[i],
-                    p.findChild(QtGui.QLabel,
+                    p.findChild(QtWidgets.QLabel,
                                 "deadStemsLeftText_"+str(i)),
-                    p.findChild(QtGui.QLabel,
+                    p.findChild(QtWidgets.QLabel,
                                 "deadStemsLeftLabel_"+str(i)),
                     self.mort_branchesleft[i],
-                    p.findChild(QtGui.QLabel,
+                    p.findChild(QtWidgets.QLabel,
                                 "deadBranchesLeftText_"+str(i)),
-                    p.findChild(QtGui.QLabel,
+                    p.findChild(QtWidgets.QLabel,
                                 "deadBranchesLeftLabel_"+str(i)),
             ]
             self.toToggle[p] = {self.mort_amount[i]: toggle_lst}
@@ -502,7 +502,7 @@ class ProjectDialog(GenericDialog, Ui_project):
     def _setup_treeGrowth_pages(self):
        
         pages = [
-                self.findChild(QtGui.QWidget, "treeGrowthPage_"+str(i))
+                self.findChild(QtWidgets.QWidget, "treeGrowthPage_"+str(i))
                 for i in range(self.treeNum.maximum())
         ]
         self.growth_csvbut, self.growth_custombut = [], []
@@ -522,17 +522,17 @@ class ProjectDialog(GenericDialog, Ui_project):
             ))
 
             self.growth_allom.append(
-                    p.findChild(QtGui.QComboBox, "allom_"+str(i))
+                    p.findChild(QtWidgets.QComboBox, "allom_"+str(i))
             )
             self.growth_csvbut.append(
-                    p.findChild(QtGui.QRadioButton,"growthCsvButton_"+str(i))
+                    p.findChild(QtWidgets.QRadioButton,"growthCsvButton_"+str(i))
             )
             self.growth_custombut.append(
-                    p.findChild(QtGui.QRadioButton,
+                    p.findChild(QtWidgets.QRadioButton,
                                 "growthCustomButton_"+str(i))
             )
             self.growth_csvline.append(
-                    p.findChild(QtGui.QLineEdit, 
+                    p.findChild(QtWidgets.QLineEdit, 
                                 "growthCsvBrowseBox_"+str(i))
             )
 
@@ -557,9 +557,9 @@ class ProjectDialog(GenericDialog, Ui_project):
             # toggle
             toggle_lst = [
                     self.growth_csvline[i],
-                    p.findChild(QtGui.QPushButton,
+                    p.findChild(QtWidgets.QPushButton,
                                 "growthCsvBrowseButton_"+str(i)),
-                    p.findChild(QtGui.QLabel,
+                    p.findChild(QtWidgets.QLabel,
                                 "growthCsvLabel_"+str(i))
             
             ]
@@ -600,7 +600,7 @@ class ProjectDialog(GenericDialog, Ui_project):
     def _setup_litter_pages(self):
 
         pages = [
-                self.findChild(QtGui.QWidget, "litterPage_"+str(i)) 
+                self.findChild(QtWidgets.QWidget, "litterPage_"+str(i)) 
                 for i in range(self.litterNum.maximum())
         ]
         self.litter_input = []
@@ -622,23 +622,23 @@ class ProjectDialog(GenericDialog, Ui_project):
 
             # populate lists of widgets
             self.litter_input.append(
-                    p.findChild(QtGui.QDoubleSpinBox,
+                    p.findChild(QtWidgets.QDoubleSpinBox,
                                 "litterInput_"+str(i))
             )
             self.litter_freq.append(
-                    p.findChild(QtGui.QSpinBox,
+                    p.findChild(QtWidgets.QSpinBox,
                                 "litterFreq_"+str(i))
             )
             self.litter_customline.append(
-                    p.findChild(QtGui.QLineEdit,
+                    p.findChild(QtWidgets.QLineEdit,
                                 "litterCustomLine_"+str(i))
             )
             self.litter_intervalbut.append(
-                    p.findChild(QtGui.QRadioButton,
+                    p.findChild(QtWidgets.QRadioButton,
                                 "litterInterval_"+str(i))
             )
             self.litter_custombut.append(
-                    p.findChild(QtGui.QRadioButton,
+                    p.findChild(QtWidgets.QRadioButton,
                                 "litterCustom_"+str(i))
             )
 
@@ -656,7 +656,7 @@ class ProjectDialog(GenericDialog, Ui_project):
             # to toggle
             toggle_lst = [
                     self.litter_customline[i],
-                    p.findChild(QtGui.QLabel, 
+                    p.findChild(QtWidgets.QLabel, 
                                 "litterCustomText_"+str(i)),
             ]
             self.toToggle[p] = {self.litter_custombut[i]: toggle_lst}
@@ -669,7 +669,7 @@ class ProjectDialog(GenericDialog, Ui_project):
     def _setup_fert_pages(self):
         
         pages = [
-                self.findChild(QtGui.QWidget, "fertPage_"+str(i))
+                self.findChild(QtWidgets.QWidget, "fertPage_"+str(i))
                 for i in range(self.fertNum.maximum())
         ]
         self.fert_input = []
@@ -695,27 +695,27 @@ class ProjectDialog(GenericDialog, Ui_project):
             ))
             # populate the widget lists
             self.fert_input.append(
-                    p.findChild(QtGui.QDoubleSpinBox,
+                    p.findChild(QtWidgets.QDoubleSpinBox,
                                 "fertInput_"+str(i))
             )
             self.fert_nitrogen.append(
-                    p.findChild(QtGui.QSpinBox,
+                    p.findChild(QtWidgets.QSpinBox,
                                 "fertNitrogen_"+str(i))
             )
             self.fert_freq.append(
-                    p.findChild(QtGui.QSpinBox,
+                    p.findChild(QtWidgets.QSpinBox,
                                 "fertFreq_"+str(i))
             )
             self.fert_customline.append(
-                    p.findChild(QtGui.QLineEdit, 
+                    p.findChild(QtWidgets.QLineEdit, 
                                 "fertCustomLine_"+str(i))
             )
             self.fert_custombut.append(
-                    p.findChild(QtGui.QRadioButton,
+                    p.findChild(QtWidgets.QRadioButton,
                                 "fertCustom_"+str(i))
             )
             self.fert_intervalbut.append(
-                    p.findChild(QtGui.QRadioButton,
+                    p.findChild(QtWidgets.QRadioButton,
                                 "fertInterval_"+str(i))
             )
             
@@ -736,7 +736,7 @@ class ProjectDialog(GenericDialog, Ui_project):
             # to toggle
             toggle_lst = [
                     self.fert_customline[i],
-                    p.findChild(QtGui.QLabel,
+                    p.findChild(QtWidgets.QLabel,
                                 "fertCustomText_"+str(i)),
             ]
             self.toToggle[p] = {self.fert_custombut[i]: toggle_lst}
@@ -749,6 +749,6 @@ class ProjectDialog(GenericDialog, Ui_project):
 
 if __name__ == '__main__':
     import sys
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     ui = ProjectDialog()
     sys.exit(ui.exec_())

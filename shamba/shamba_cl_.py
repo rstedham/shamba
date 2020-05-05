@@ -102,7 +102,8 @@ def main(n):
     Specify below the unique name of the new project folder in the 
     shamba/shamba_projects folder
     """
-    cfg.SAV_DIR = os.path.join(cfg.PROJ_DIR, 'UG_TS_2016')
+    project_name = 'thibaut' # UG_TS_2016
+    cfg.SAV_DIR = os.path.join(cfg.PROJ_DIR, project_name)
     
     # specifiying input and output files
     cfg.INP_DIR = os.path.join(cfg.SAV_DIR, 'input')

@@ -4,7 +4,7 @@ Module containing translate_ function.
 Just a shorthand for QGui.QApplication.translate_
 """
 
-from PyQt4 import QtGui
+from PyQt5 import QtGui, QtWidgets
 
 
 def translate_(text):
@@ -14,6 +14,6 @@ def translate_(text):
     to save space basically
     """
     
-    return QtGui.QApplication.translate(
-            "MainWindow", text, None, QtGui.QApplication.UnicodeUTF8
+    return QtWidgets.QApplication.translate(
+            "MainWindow", text, None
     )
