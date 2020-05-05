@@ -16,7 +16,7 @@ sys.path.append(os.path.dirname(_dir))
 
 from shamba.model import cfg, io_
 
-from PyQt4 import QtGui, QtCore
+from PyQt5 import QtGui, QtCore, QtWidgets
 
 from shamba.gui.designer.main_ui import Ui_SHAMBA
 from shamba.gui.general_dialog import GeneralDialog
@@ -30,7 +30,7 @@ from shamba.gui.project_model import ProjectModel
 from shamba.gui.emit_model import Emissions
 
 
-class MainInterface(QtGui.QMainWindow, Ui_SHAMBA):
+class MainInterface(QtWidgets.QMainWindow, Ui_SHAMBA):
     
     """
     Main driver for the SHAMBA tool (GUI mode).
@@ -129,7 +129,7 @@ class MainInterface(QtGui.QMainWindow, Ui_SHAMBA):
         except KeyError:
             text = "No help available."
 
-        help_dialog = QtGui.QMessageBox(tab.parent())
+        help_dialog = QtWidgets.QMessageBox(tab.parent())
         help_dialog.setModal(False)
         help_dialog.setWindowTitle(_("Help"))
         help_dialog.setText(_(text))
@@ -146,7 +146,7 @@ class MainInterface(QtGui.QMainWindow, Ui_SHAMBA):
         """
         # Show "are you sure" dialog if general info already entered"
         if self.model.general is not None:
-            popup = QtGui.QMessageBox(self)
+            popup = QtWidgets.QMessageBox(self)
             popup.setWindowTitle(_("Overwrite?"))
             popup.setText(_(
                     "This will overwrite previous " + 
@@ -154,8 +154,8 @@ class MainInterface(QtGui.QMainWindow, Ui_SHAMBA):
             popup.setInformativeText(_(
                    "Do you wish to continue?"))
             popup.setStandardButtons(
-                    QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
-            if popup.exec_() == QtGui.QMessageBox.No:
+                    QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+            if popup.exec_() == QtWidgets.QMessageBox.No:
                 return
         
         # clear any previous data
@@ -179,7 +179,7 @@ class MainInterface(QtGui.QMainWindow, Ui_SHAMBA):
             self.generalOutputBox.setText(self.model.general.description)
             _show_normal_cursor()
     
-    @QtCore.pyqtSlot(QtGui.QWidget, list)
+    @QtCore.pyqtSlot(QtWidgets.QWidget, list)
     def show_project_dialog(self, tab, model_list, isBaseline=True):
         """
         Slot to show the project dialog (project_dialog.ProjectDialog)
@@ -210,7 +210,7 @@ class MainInterface(QtGui.QMainWindow, Ui_SHAMBA):
             projectName = nameDialog.nameBox.text()
         
         # Find the right comboBox in the tab (baseline or intervention)
-        selector = tab.findChild(QtGui.QComboBox)
+        selector = tab.findChild(QtWidgets.QComboBox)
         
         # run the project dialog
         projectUi = ProjectDialog(isBaseline=isBaseline, parent=self)
@@ -221,7 +221,7 @@ class MainInterface(QtGui.QMainWindow, Ui_SHAMBA):
             
             # find index and the outputBox to write info in
             index = selector.currentIndex()
-            outputBox = tab.findChild(QtGui.QTextEdit)
+            outputBox = tab.findChild(QtWidgets.QTextEdit)
             
             # Actually run the model
             model_list.append(
@@ -329,10 +329,10 @@ class MainInterface(QtGui.QMainWindow, Ui_SHAMBA):
     def mousePressEvent(self, event):
         """ Override mousePressEvent so field is cleared when a 
         non-widget item in the window is clicked."""
-        focusedWidget = QtGui.QApplication.focusWidget()
+        focusedWidget = QtWidgets.QApplication.focusWidget()
         if focusedWidget is not None:
             focusedWidget.clearFocus()
-        QtGui.QMainWindow.mousePressEvent(self, event)
+        QtWidgets.QMainWindow.mousePressEvent(self, event)
 
     def closeEvent(self, event):
         """
@@ -344,52 +344,52 @@ class MainInterface(QtGui.QMainWindow, Ui_SHAMBA):
             event.accept()
         else:
             ret = self.show_save_dialog()
-            if ret == QtGui.QMessageBox.Save:
+            if ret == QtWidgets.QMessageBox.Save:
                 wasSaved = self.model.save_()
                 if wasSaved:
                     event.accept()
                 else:
                     event.ignore()
-            elif ret == QtGui.QMessageBox.Discard:
+            elif ret == QtWidgets.QMessageBox.Discard:
                 event.accept()
             else:   # cancelled
                 event.ignore()
        
     def show_save_dialog(self):
         """Popup dialog that shows on a close event."""
-        popup = QtGui.QMessageBox(self)
+        popup = QtWidgets.QMessageBox(self)
         popup.setWindowTitle(_("Save changes?"))
         popup.setText(_(
                 "Do you want to save your changes before exiting?"))
         popup.setStandardButtons(
-                QtGui.QMessageBox.Save | QtGui.QMessageBox.Discard |
-                QtGui.QMessageBox.Cancel)
+                QtWidgets.QMessageBox.Save | QtWidgets.QMessageBox.Discard |
+                QtWidgets.QMessageBox.Cancel)
         ret = popup.exec_() 
         return ret
 
     def _setup_error_messages(self):
         """Set up the various QErrorMessage objects used."""
-        self.noGeneralInfoError = QtGui.QErrorMessage(self)
+        self.noGeneralInfoError = QtWidgets.QErrorMessage(self)
         self.noGeneralInfoError.setWindowTitle(
                 _("No general information found")
         )
         
-        self.missingData = QtGui.QErrorMessage(self)
+        self.missingData = QtWidgets.QErrorMessage(self)
         self.missingData.setWindowTitle(
                 _("Missing data"))
         
-        self.climateOpenError = QtGui.QErrorMessage(self)
+        self.climateOpenError = QtWidgets.QErrorMessage(self)
         self.climateOpenError.setWindowTitle(
                 _("Error opening file"))
         
 # Global functions for different cursor settings
 def _show_busy_cursor(): 
-    QtGui.QApplication.setOverrideCursor(
+    QtWidgets.QApplication.setOverrideCursor(
             QtGui.QCursor(QtCore.Qt.WaitCursor))
     
 
 def _show_normal_cursor():
-    QtGui.QApplication.restoreOverrideCursor()
+    QtWidgets.QApplication.restoreOverrideCursor()
 
 
 class Model(object):
@@ -418,7 +418,7 @@ class Model(object):
     def get_save_filename(self):
         """Open a getSaveFileName and save the filename returned."""
         
-        filename = QtGui.QFileDialog.getSaveFileName(
+        filename = QtWidgets.QFileDialog.getSaveFileName(
                 self.ui, _('Save file'),
                 os.path.abspath(cfg.PROJ_DIR),
                 _("SHAMBA project files (*.shamba)")
@@ -489,14 +489,14 @@ class Model(object):
         try:       
             os.makedirs(cfg.SAV_DIR)
         except OSError:
-            popup = QtGui.QMessageBox(self.ui)
+            popup = QtWidgets.QMessageBox(self.ui)
             popup.setWindowTitle(_("Overwrite?"))
             popup.setText(
                     _("That folder exists. Do you want to overwrite it?"))
             popup.setStandardButtons(
-                    QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
+                    QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
             popup_ret= popup.exec_()
-            if popup_ret == QtGui.QMessageBox.No:
+            if popup_ret == QtWidgets.QMessageBox.No:
                 return self._create_save_dirs() # get new filename
             else: # remove existing dir then make new one
                 shutil.rmtree(cfg.SAV_DIR)
@@ -627,15 +627,17 @@ class Model(object):
         
         # add an asterisk to window title if change made
         title = self.ui.windowTitle()
-        
+        import unicodedata
+        asciiTitle = unicodedata.normalize('NFKD', title).encode('ascii','ignore')
+
         if not upToDate:
-            if not title.endsWith(_('*')):    
-                title.append("*")
+            if not asciiTitle.endswith(_('*')):    
+                asciiTitle +="*"
         else:
-            if title.endsWith(_('*')):
-                title.remove(QtCore.QChar('*'))
+            if asciiTitle.endswith(_('*')):
+                asciiTitle.remove(QtCore.QChar('*'))
         
-        self.ui.setWindowTitle(title)
+        self.ui.setWindowTitle(asciiTitle)
 
 class OutLog(object):
     """Redirect an output (stdout, stderr, etc.) to a QTextEdit.
@@ -659,7 +661,7 @@ class OutLog(object):
             tc = self.edit.textColor()
             self.edit.setTextColor(self.color)
 
-        self.edit.moveCursor(QtGui.QTextCursor.End)
+        self.edit.moveCursor(QtWidgets.QTextCursor.End)
         self.edit.insertPlainText( m )
 
         if self.color:
@@ -674,7 +676,7 @@ if __name__ == '__main__':
     from shamba.gui.disclaimer import DisclaimerDialog
 
     # Set up gui
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     
     # show the disclaimer dialog
     form = DisclaimerDialog()

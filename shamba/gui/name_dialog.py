@@ -1,11 +1,11 @@
 
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 from shamba.gui.translate_ import translate_ as _
 from shamba.gui.designer.name_dialog_ui import Ui_name
 
 
-class NameDialog(Ui_name, QtGui.QDialog):
+class NameDialog(Ui_name, QtWidgets.QDialog):
 
     def __init__(self, isBaseline=True, parent=None):
         super(NameDialog, self).__init__(parent)

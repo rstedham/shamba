@@ -132,7 +132,7 @@ def read_csv(fileIn, cols=None):
     
     array = np.genfromtxt(
             fileIn,
-            skiprows=1,
+            skip_header=1,
             usecols=cols,
             comments='#',
             delimiter=','

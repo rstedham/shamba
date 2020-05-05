@@ -1,4 +1,4 @@
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 from shamba.gui.translate_ import translate_ as _
 from shamba.gui import designer
@@ -7,7 +7,7 @@ import sys
 import os
 
 
-DISCLAIMER = """The SHAMBA tool has been developed with support from: the Sustainability and Climate Change department at PwC UK and funded by the Rockefeller Foundation; the Climate Change, Agriculture and Food Security research program (CCAFS), part of CGIAR, funded by the European Union (EU) and with technical support from the International Fund for Agricultural Development (IFAD);  and the Ecosystem Services for Poverty Alleviation (ESPA) research programme, which is in turn funded by the United Kingdom’s Department for International Development (DFID), the Natural Environment Research Council (NERC) and the Economic and Social Research Council (ESRC).
+DISCLAIMER = """The SHAMBA tool has been developed with support from: the Sustainability and Climate Change department at PwC UK and funded by the Rockefeller Foundation; the Climate Change, Agriculture and Food Security research program (CCAFS), part of CGIAR, funded by the European Union (EU) and with technical support from the International Fund for Agricultural Development (IFAD);  and the Ecosystem Services for Poverty Alleviation (ESPA) research programme, which is in turn funded by the United Kingdom's Department for International Development (DFID), the Natural Environment Research Council (NERC) and the Economic and Social Research Council (ESRC).
 
 The outputs of the tool are designed to give an indication of the mitigation potential of implementing CSA practices at specified sites. This information can be used to help assess the feasibility of a project or to provide an indication of potential project performance. The functionality for monitoring emissions reductions and removals achieved by a project are not available in this version of the SHAMBA tool.
 
@@ -19,10 +19,10 @@ This software is provided under the University of Edinburgh's Open Technology. B
 
 """
 
-class DisclaimerDialog(QtGui.QDialog):
+class DisclaimerDialog(QtWidgets.QDialog):
 
     def __init__(self, parent=None):
-        QtGui.QWidget.__init__(self, parent)
+        QtWidgets.QWidget.__init__(self, parent)
         self.ui = Ui_Disclaimer()
         self.ui.setupUi(self)
      
@@ -31,13 +31,14 @@ class DisclaimerDialog(QtGui.QDialog):
         pix = QtGui.QPixmap(image_dir)
         self.ui.splashImage.setPixmap(pix.scaled(self.ui.splashImage.size(),QtCore.Qt.KeepAspectRatio))
         self.ui.disclaimerText.setText(_(DISCLAIMER))
+        
 
     def reject(self):
         sys.exit(0)
 
 if __name__ == "__main__":
     import sys
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     myapp = DisclaimerDialog()
     myapp.show()
     sys.exit(app.exec_())

@@ -2,7 +2,7 @@
 
 
 import math
-from PyQt4 import QtGui,QtCore
+from PyQt5 import QtGui,QtCore, QtWidgets
 from shamba.gui.translate_ import translate_ as _
 from functools import partial
 
@@ -13,7 +13,7 @@ class NextBackButtons(QtCore.QObject):
     """
 
     # Emitted after next button is pressed, *before* page actually changes
-    finishedPage = QtCore.pyqtSignal(QtGui.QWidget)
+    finishedPage = QtCore.pyqtSignal(QtWidgets.QWidget)
    
     # note also that the 'accepted' signal of the parent QDialog
     # is emitted when 'Done' button is pressed
@@ -128,7 +128,7 @@ class NextBackButtons(QtCore.QObject):
             pass
 
 
-class PageComplete(QtGui.QWidget):
+class PageComplete(QtWidgets.QWidget):
     """
 
     Class for checking if page of stackedLayout has been completed
@@ -193,25 +193,25 @@ class PageComplete(QtGui.QWidget):
 
         def signal(widget, type):
             # Returns the signal name (callable) and the args to emit
-            if type == QtGui.QLineEdit:
+            if type == QtWidgets.QLineEdit:
                 sig = widget.textChanged
                 emit = widget.text()
-            elif type == QtGui.QSpinBox or type == QtGui.QDoubleSpinBox:
+            elif type == QtWidgets.QSpinBox or type == QtWidgets.QDoubleSpinBox:
                 sig = widget.valueChanged
                 emit = widget.value()
-            elif type == QtGui.QButtonGroup:
+            elif type == QtWidgets.QButtonGroup:
                 sig = widget.buttonClicked
                 emit = widget.checkedButton()
-            elif type == QtGui.QComboBox:
+            elif type == QtWidgets.QComboBox:
                 sig = widget.currentIndexChanged
                 emit = widget.currentIndex()
             return sig, emit
         slot = {
-                QtGui.QLineEdit: self._check_complete_QLineEdit,
-                QtGui.QSpinBox: self._check_complete_QSpinBox,
-                QtGui.QDoubleSpinBox: self._check_complete_QDoubleSpinBox,
-                QtGui.QButtonGroup: self._check_complete_QButtonGroup,
-                QtGui.QComboBox: self._check_complete_QComboBox
+                QtWidgets.QLineEdit: self._check_complete_QLineEdit,
+                QtWidgets.QSpinBox: self._check_complete_QSpinBox,
+                QtWidgets.QDoubleSpinBox: self._check_complete_QDoubleSpinBox,
+                QtWidgets.QButtonGroup: self._check_complete_QButtonGroup,
+                QtWidgets.QComboBox: self._check_complete_QComboBox
         }
         
         # Connect signals and slots for checking completeness

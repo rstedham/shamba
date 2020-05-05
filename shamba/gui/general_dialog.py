@@ -6,7 +6,7 @@
 import os
 from shamba.model import cfg
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui
 from shamba.gui.translate_ import translate_ as _
 from shamba.gui.designer.general_dialog_ui import Ui_general
 from shamba.gui.page_change import NextBackButtons
@@ -164,6 +164,6 @@ class GeneralDialog(GenericDialog, Ui_general):
 
 if __name__ == '__main__':
     import sys
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     ui = GeneralDialog()
     sys.exit(ui.exec_())

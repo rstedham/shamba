@@ -6,7 +6,7 @@ from matplotlib.figure import Figure
 from matplotlib.patches import Polygon
 from matplotlib.lines import Line2D
 
-from PyQt4 import QtCore,QtGui
+from PyQt5 import QtCore,QtGui,QtWidgets
 
 from shamba.model import cfg
 
@@ -39,8 +39,8 @@ class PlotWidget(FigureCanvas):
         FigureCanvas.__init__(self, self.fig)
         self.setParent(parent)
 
-        self.setSizePolicy(QtGui.QSizePolicy.Expanding,
-                           QtGui.QSizePolicy.Expanding)
+        self.setSizePolicy(QtWidgets.QSizePolicy.Expanding,
+                           QtWidgets.QSizePolicy.Expanding)
         self.updateGeometry()
 
         self.plots = {}
