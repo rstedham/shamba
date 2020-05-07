@@ -291,17 +291,17 @@ class TreeModel(object):
             plt.savefig(os.path.join(cfg.OUT_DIR, saveName))
 
     def print_biomass(self):
-        print "\n\nBIOMASS MODEL"
-        print "=============\n"
+        print ("\n\nBIOMASS MODEL")
+        print ("=============\n")
         totalBiomass = np.sum(self.woodyBiom, axis=1)
-        print "year  biomass"
+        print ("year  biomass")
         for i in range(len(totalBiomass)):
-            print i, "  ",totalBiomass[i] 
+            print (i, "  ",totalBiomass[i] )
 
     def print_balance(self):
-        print "\nMass-balance sum (kg C /ha): ", self.balance['bal'].sum()
+        print ("\nMass-balance sum (kg C /ha): ", self.balance['bal'].sum())
         totDiff = self.balance['bal'].sum() / self.woodyBiom[-1].sum()
-        print "Normalized mass balance (kg C /ha): ",totDiff
+        print ("Normalized mass balance (kg C /ha): ",totDiff)
 
     def save_(self, file='tree_model.csv'):
         """Save output and biomass to a csv file.

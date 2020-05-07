@@ -190,16 +190,16 @@ class Climate(object):
                       'MAY','JUN','JUL','AUG',
                       'SEP','OCT','NOV','DEC']
 
-        print "\nCLIMATE DATA"
-        print "============\n"
-        print "Month   Temp.    Rain     Evap."
-        print "        (*C)     (mm)     (mm) "
-        print "-------------------------------"
+        print ("\nCLIMATE DATA")
+        print ("============\n")
+        print ("Month   Temp.    Rain     Evap.")
+        print ("        (*C)     (mm)     (mm) ")
+        print ("-------------------------------")
         for i in range(12):
-            print " %s    %5.2f   %6.2f   %6.2f" % (
+            print (" %s    %5.2f   %6.2f   %6.2f" % (
                     monthNames[i], self.temp[i], self.rain[i], self.evap[i]
-            )
-        print ""
+            ))
+        print ("")
 
     def save_(self, file='climate.csv'):
         """Save climate data to a csv file.

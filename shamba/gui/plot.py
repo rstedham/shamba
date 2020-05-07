@@ -95,8 +95,7 @@ class PlotWidget(FigureCanvas):
         models = {}
         for c in self.totals:
             models[self.totals[c][0]] = self.totals[c][1:]
-        ms = models.keys()
-        ms.sort()
+        ms = sorted(models.keys())
         
         years =  self.axes.dataLim.get_points()[1,0]
         outstr = "Total Emissions/Removals\nover %d years " % cfg.N_ACCT
