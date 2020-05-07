@@ -8,9 +8,9 @@ Write-Host " |____/ |_| |_|/_/   \_\|_|  |_||____//_/   \_\"  -ForegroundColor G
 Write-Host "`n"
 Write-Host "Welcome to the Shamba setup!`n"
 
-$miniconda_exists = Read-Host 'Do you already have Miniconda for Python 3.6 installed on your computer? [y/n]'
+$miniconda_exists = Read-Host 'Do you already have Miniconda for Python 3.7 installed on your computer? [y/n]'
 if ($miniconda_exists -ne 'y') {
-    Write-Host "`nPlease first install Miniconda for Python 3.6 from the Anaconda official website: https://docs.conda.io/en/latest/miniconda.html"  -ForegroundColor Green
+    Write-Host "`nPlease first install Miniconda for Python 3.7 from the Anaconda official website: https://docs.conda.io/en/latest/miniconda.html"  -ForegroundColor Green
     Write-Host "Once done, please start this script in a 'Miniconda Powershell Prompt'.`n"  -ForegroundColor Green
     exit
 }else {
@@ -21,8 +21,8 @@ $shamba_env_name = Read-Host 'Please enter a name for the shamba virtual environ
 
 Try
 {
-conda config --set channel_priority strict #https://github.com/conda/conda/issues/7626
-conda create -y -n $shamba_env_name python=3.6
+conda config --set channel_priority strict #from https://github.com/conda/conda/issues/7626
+conda create -y -n $shamba_env_name python=3.7
 conda activate $shamba_env_name
 
 Write-Host "`We are now installing the Shamba dependencies in '$shamba_env_name' environment. This can take several minutes."
