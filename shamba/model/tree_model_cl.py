@@ -138,18 +138,18 @@ class TreeModel(object):
         #   -> woodyBiom and output get converted at end before returning
 
         # First get params from bpFile and ppFile
-        print 'new tree cohort running...'
-        print initialBiomass, yearPlanted, initialStandDens   
+        print ('new tree cohort running...')
+        print (initialBiomass, yearPlanted, initialStandDens   )
         
         yp = yearPlanted
-        print 'yp,  then initialSD'
-        print yp
-        print initialStandDens 
+        print ('yp,  then initialSD')
+        print (yp)
+        print (initialStandDens )
         
         standDens = np.zeros(cfg.N_YEARS+1) 
         standDens[yp] = initialStandDens
-        print 'standDens:'
-        print standDens
+        print ('standDens:')
+        print (standDens)
 
         inputParams = {
                 'live': np.array(
@@ -221,7 +221,7 @@ class TreeModel(object):
                     inputParams['dead'][i] + inputParams['thin'][i]
             )
             if standDens[i]<1:
-                print 'SD [i] is less than 1, end of this tree cohort...'
+                print ('SD [i] is less than 1, end of this tree cohort...')
                 break
             pools[i] = woodyBiom[i] / standDens[i]
 
@@ -302,17 +302,17 @@ class TreeModel(object):
             plt.savefig(os.path.join(cfg.OUT_DIR, saveName))
 
     def print_biomass(self):
-        print "\n\nBIOMASS MODEL"
-        print "=============\n"
+        print ("\n\nBIOMASS MODEL")
+        print ("=============\n")
         totalBiomass = np.sum(self.woodyBiom, axis=1)
-        print "year  biomass"
+        print ("year  biomass")
         for i in range(len(totalBiomass)):
-            print i, "  ",totalBiomass[i] 
+            print (i, "  ",totalBiomass[i] )
 
     def print_balance(self):
-        print "\nMass-balance sum (kg C /ha): ", self.balance['bal'].sum()
+        print ("\nMass-balance sum (kg C /ha): ", self.balance['bal'].sum())
         totDiff = self.balance['bal'].sum() / self.woodyBiom[-1].sum()
-        print "Normalized mass balance (kg C /ha): ",totDiff
+        print ("Normalized mass balance (kg C /ha): ",totDiff)
 
     def save_(self, file='tree_model.csv'):
         """Save output and biomass to a csv file.

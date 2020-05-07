@@ -130,12 +130,12 @@ class TreeGrowth(object):
         
         age_input = ['age1','age2','age3','age4','age5','age6']
         age = {key: dictionary[key] for key in age_input}
-        age = np.array(age.values(),dtype=float)
+        age = np.array(list(age.values())).astype(float) #https://stackoverflow.com/questions/45957968/float-arguments-and-dict-values-with-numpy
         age = np.array(sorted(age, key=int))
                 
         diam_input = ['diam1','diam2','diam3','diam4','diam5','diam6']
         diam = {key: dictionary[key] for key in diam_input}
-        diam = np.array(diam.values(),dtype=float)
+        diam = np.array(list(diam.values())).astype(float)
                 
         params = {
         'age': age,
@@ -243,12 +243,12 @@ class TreeGrowth(object):
         
         age_input = ['sp3_age1','sp3_age2','sp3_age3','sp3_age4','sp3_age5','sp3_age6']
         age = {key: dictionary[key] for key in age_input}
-        age = np.array(age.values(),dtype=float)
+        age = np.array(list(age.values())).astype(float)
         age = np.array(sorted(age, key=int))
                 
         diam_input = ['sp3_diam1','sp3_diam2','sp3_diam3','sp3_diam4','sp3_diam5','sp3_diam6']
         diam = {key: dictionary[key] for key in diam_input}
-        diam = np.array(diam.values(),dtype=float)
+        diam = np.array(list(diam.values())).astype(float)
                 
         params = {
         'age': age,
@@ -474,46 +474,46 @@ class TreeGrowth(object):
         mse = True
 
         
-        print "\n\nTREE GROWTH DATA"
-        print "=========\n"
-        print "Allometric: ",self.allom
-        print "\n  Age    Diameter  Biomass"
-        print "(years)    (cm)     (kg C)"
-        print "--------------------------"
+        print ("\n\nTREE GROWTH DATA")
+        print ("=========\n")
+        print ("Allometric: ",self.allom)
+        print ("\n  Age    Diameter  Biomass")
+        print ("(years)    (cm)     (kg C)")
+        print ("--------------------------")
         for i in range(len(self.age)):
-            print "  %2d      %5.2f     %6.2f" % (
-                    self.age[i], self.diam[i], self.biomass[i])
+            print ("  %2d      %5.2f     %6.2f" % (
+                    self.age[i], self.diam[i], self.biomass[i]))
         if fit:
-            print "\n Data      Exp.     Hyp.     Lin.     Log."
-            print "-----------------------------------------"
+            print ("\n Data      Exp.     Hyp.     Lin.     Log.")
+            print ("-----------------------------------------")
             for i in range(len(self.age)):
-                print "%6.2f   %6.2f   %6.2f   %6.2f   %6.2f" % (
+                print ("%6.2f   %6.2f   %6.2f   %6.2f   %6.2f" % (
                         self.biomass[i], 
                         self.allFitData['exp'][i],
                         self.allFitData['hyp'][i],
                         self.allFitData['lin'][i], 
                         self.allFitData['log'][i]
-                )
+                ))
         if params and mse:
-            print "\nMSE      %6.2f   %6.2f   %6.2f   %6.2f" % (
+            print ("\nMSE      %6.2f   %6.2f   %6.2f   %6.2f" % (
                     self.allMse['exp'], 
                     self.allMse['hyp'], 
                     self.allMse['lin'], 
                     self.allMse['log']
-            )
-            print "a        %6.2f   %6.2f   %6.2f   %6.2f" % (
+            ))
+            print ("a        %6.2f   %6.2f   %6.2f   %6.2f" % (
                     self.allFitParams['exp'][0], 
                     self.allFitParams['hyp'][0],
                     self.allFitParams['lin'][0], 
                     self.allFitParams['log'][0]
-            )
-            print "b          -     %6.2f    -      %6.2f" % (
+            ))
+            print ("b          -     %6.2f    -      %6.2f" % (
                     self.allFitParams['hyp'][1],
                     self.allFitParams['log'][1]
-            )
-            print "c           -         -       -      %5.2f" % (
+            ))
+            print ("c           -         -       -      %5.2f" % (
                     self.allFitParams['log'][2]
-            )
+            ))
 
     def save_(self, file='tree_growth.csv'):
         """Save growth stuff to a csv file

@@ -116,7 +116,7 @@ class MainInterface(QtWidgets.QMainWindow, Ui_SHAMBA):
         self.mitigationButton.clicked.connect(self.show_mitigation_graph)
         self.graphSaveButton.clicked.connect(self.model.save_graph)
 
-    @QtCore.pyqtSlot()
+   # #@QtCore.pyqtSlot() https://stackoverflow.com/questions/40674940/why-does-pyqtslot-decorator-cause-typeerror-connect-failed
     def show_help(self, tab):
         """Open a QMessageBox.about dialog to show help text
 
@@ -136,7 +136,7 @@ class MainInterface(QtWidgets.QMainWindow, Ui_SHAMBA):
         help_dialog.show()
  
 
-    @QtCore.pyqtSlot()
+    ##@QtCore.pyqtSlot()
     def show_general_dialog(self):
         """
         Slot to show the general dialog (in general_dialog.GeneralDialog)
@@ -179,7 +179,7 @@ class MainInterface(QtWidgets.QMainWindow, Ui_SHAMBA):
             self.generalOutputBox.setText(self.model.general.description)
             _show_normal_cursor()
     
-    @QtCore.pyqtSlot(QtWidgets.QWidget, list)
+    #@QtCore.pyqtSlot(QtWidgets.QWidget, list)
     def show_project_dialog(self, tab, model_list, isBaseline=True):
         """
         Slot to show the project dialog (project_dialog.ProjectDialog)
@@ -238,7 +238,7 @@ class MainInterface(QtWidgets.QMainWindow, Ui_SHAMBA):
             # Return to normal
             _show_normal_cursor()
             
-    @QtCore.pyqtSlot()
+    #@QtCore.pyqtSlot()
     def show_mitigation_graph(self):
         """
         Slot to show the mitigation estimates plot
@@ -432,7 +432,7 @@ class Model(object):
 
         return wasSaved
     
-    @QtCore.pyqtSlot()
+    #@QtCore.pyqtSlot()
     def save_(self):
         """Slot to save the model information from this model run.
         Saves to existing save name if it exits"""
@@ -455,7 +455,7 @@ class Model(object):
         self._update_save_status(True)
         return True
     
-    @QtCore.pyqtSlot()
+    #@QtCore.pyqtSlot()
     def save_as(self):
         """Like save_ method, but always save to a new name."""
         if cfg.PROJ_NAME is None:
@@ -583,7 +583,7 @@ class Model(object):
         with open(oe_fname, 'w+') as fout:
             fout.write(oe_data)
     
-    @QtCore.pyqtSlot()
+    #@QtCore.pyqtSlot()
     def save_graph(self):
         # save the plot
         base_name = str(self.ui.baselineSelectorPlot.currentText())
@@ -628,14 +628,15 @@ class Model(object):
         # add an asterisk to window title if change made
         title = self.ui.windowTitle()
         import unicodedata
-        asciiTitle = unicodedata.normalize('NFKD', title).encode('ascii','ignore')
+        asciiTitle = unicodedata.normalize('NFKD', title)#.encode('ascii','ignore')
+        suffix = "*"
 
         if not upToDate:
-            if not asciiTitle.endswith(_('*')):    
-                asciiTitle +="*"
+            if not asciiTitle.endswith(suffix):    
+                asciiTitle += suffix
         else:
-            if asciiTitle.endswith(_('*')):
-                asciiTitle.remove(QtCore.QChar('*'))
+            if asciiTitle.endswith(suffix):
+                asciiTitle.remove(QtCore.QChar(suffix))
         
         self.ui.setWindowTitle(asciiTitle)
 
