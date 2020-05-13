@@ -72,9 +72,9 @@ def main(n):
 
     """
     ## STEP 1 ## 
-    Point SHAMBA towards location of the 'shamba_stable_v1.1' folder 
+    Point SHAMBA towards location of the 'shamba' folder 
     on your computer by specifying the BASE_PATH in the 'cfg.py' script 
-    (the script can be found in the 'shamba_stable_v1.1/shamba/model' folder).
+    (the script can be found in the 'shamba/shamba/model' folder).
     """
    
     # Initial stuff
