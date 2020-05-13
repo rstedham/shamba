@@ -184,7 +184,8 @@ def read_mixed_csv(fileIn, cols=None, types=None):
 def get_cl_args():
     """
     Parse the command line arguments for graph and report generation 
-    (-g, -r) and verbosity of output (-v=info,-vv=debug). 
+    (-g, -r) and verbosity of output (-v=info,-vv=debug) and project name 
+    and input filename. 
     Return args.
     """
 
@@ -203,6 +204,16 @@ def get_cl_args():
     parser.add_argument(
             "-g", "--graph", action="store_true", dest="graph",
             default=False, help="Show plots"
+    )
+
+    parser.add_argument(
+            "-prj", "--project", action="store", dest="project",
+            default=False, help="project name"
+    )
+
+    parser.add_argument(
+            "-in", "--input", action="store", dest="project_input",
+            default=False, help="CSV project input file"
     )
 
     args = parser.parse_args()

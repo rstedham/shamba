@@ -70,22 +70,15 @@ from shamba.model import cfg, emit_cl, io_
 
 def main(n):
 
-    """
-    ## STEP 1 ## 
-    Point SHAMBA towards location of the 'shamba' folder 
-    on your computer by specifying the BASE_PATH in the 'cfg.py' script 
-    (the script can be found in the 'shamba/shamba/model' folder).
-    """
-   
     # Initial stuff
     cfg.args = io_.get_cl_args()
     
     """
-    ## STEP 2 ##
-    Within the 'shamba/shamba_projects' folder, set up a project folder with a 
+    ## STEP 1 ##
+    Within the './user-data/projects' folder, set up a project folder with a 
     unique project name (e.g. UG_TS_2016). Within this folder, set up a folder
     titled 'input'. Within this 'input' folder directory add copies of the
-    following four .csv files (you can copy from other existing'input' folder 
+    following four .csv files (you can copy from other existing 'input' folder 
     directories e.g. 'UG_TS_2016'):
     1. crop_ipcc_baseline.csv
     2. crop_ipcc.csv
@@ -98,9 +91,14 @@ def main(n):
     """
     ## STEP 3 ##
     Specify below the unique name of the new project folder in the 
-    shamba/shamba_projects folder
+    ./user-data/shamba_projects folder
     """
-    project_name = 'UG_TS_2016'
+    if len(cfg.args.project) == 0:
+        print ("Please type your project name:")
+        project_name = input() #'UG_TS_2016'
+    else:
+        project_name = cfg.args.project
+    
     cfg.SAV_DIR = os.path.join(cfg.PROJ_DIR, project_name)
     
     # specifiying input and output files
@@ -122,11 +120,19 @@ def main(n):
     
     ## STEP 5 ###
     To run the model for a particular intervention, save the relevant 
-    '_input.csv' file into the new shamba/shamba_projects/"project"/input
-    folder and specifiy the .csv name below    
+    '_input.csv' file into the new ./user-data/projects/"project"/input
+    folder and specifiy the .csv name below
     """
-    input_csv = 'WL_input.csv'
+    if len(cfg.args.project_input) == 0:
+        print("Please type the input ccs filename for your project (hit ENTER to use WL_input.csv as default):")
+        input_csv =input() #input_csv = 'WL_input.csv'
 
+        if  len(input_csv) == 0:
+            input_csv = "WL_input.csv"
+            print("Default input filename will be used")
+    else:
+        input_csv = cfg.args.project_input
+    
     # ----------
     # getting input data
     # ----------
@@ -737,7 +743,7 @@ if __name__ == '__main__':
     After you have completed all of the above steps, run the code.
     
     Results for each line of the _input.csv file will (i.e. each model run) 
-    will appear in a subfolder in the shamba/shamba_projects/"project"/output_/. 
+    will appear in a subfolder in the ./user-data/projects/"project"/output_/. 
     
     All results are in tCO2e.
     
