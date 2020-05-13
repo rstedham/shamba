@@ -27,7 +27,11 @@ Shamba can be used as:
 
 ### Linux based system setup
 
-We plan to create a `.sh` script for Linux based systems. For now you will require to reproduce the same steps as the Windows setup.ps1 file. You will probably need some help from any IT person.
+1. Open a terminal.
+2. From the prompt, navigate to the shamba source code folder.
+3. Execute the `./setup.sh` script.
+4. Follow the script instructions.
+5. Because of an [issue in Miniconda](https://github.com/conda/conda/issues/7980) you will have to activate created environment using the folowing command: `conda activate your-environment-name`
 
 ### Anaconda tips
 
