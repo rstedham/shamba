@@ -55,6 +55,27 @@ To start the application, run the `python shamba.pyw` Python script from Anacond
 
 When SHAMBA is launched, it will open a window containing a disclaimer about the SHAMBA tool. You must first accept this disclaimer before being able to use the tool. After accepting the terms, you will arrive at the main interface for shamba. There are four tabs: when starting any new SHAMBA project, the information in the “General” tab must first be filled out. Baselines and interventions can then be specified in the “Baselines” and “Interventions” tabs respectively. The “Mitigation Estimates” tab then allows you to plot the yearly greenhouse gas emissions for a baseline-intervention pair and calculates the mitigation estimates for that intervention.
 
+### Debuging, for developers
+
+>The following applies to Windows using Miniconda
+
+To debug and implement Shamba we actually use the open source editor Microsoft Visual Studio Code. If you want to use it also and having the Miniconda environments support, we recommand you to install the following extensions in vscode:
+
+* Python
+* Anaconda Extension Pack
+
+Then to enable a smooth debugging experience:
+
+1- start the Miniconda Powershell command line
+
+2- navigate to the shamba source code folder
+
+3- start vscode from the command line: ```%VSCODE_PATH%/vscode .```
+
+4- choose the appropriate Python interpreter in vscode (bottom left in the status bar)
+
+For any issue please go to vscode user manual website : <https://code.visualstudio.com/docs/python/python-tutorial>
+
 ### General Project Information
 
 General project information (such as location and climate) must first be specified before the rest of the SHAMBA tool can be used. In the “General” tab, click the “Enter general project information” button. A new window labelled “General Information” will appear, which contains several screens with information to enter regarding your project.
@@ -86,4 +107,3 @@ You can save your SHAMBA project (all raw data and calculations) to .csv files b
 #### Loading an Existing Project
 
 Unfortunately, the SHAMBA tool cannot load an existing project (yet). Saved project data can be imported into Excel, Python, R, and many other tools, however, since it is all in .csv format.
-

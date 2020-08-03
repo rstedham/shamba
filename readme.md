@@ -8,7 +8,7 @@ View the `shamba_cl.py` file in a Python IDE for details on how to run SHAMBA wi
 
 ## Community
 
-For any help or issued, please contact the community here [https://framavox.org/shamba](https://framavox.org/shamba/).
+For any help or issues, please contact the community here [https://framavox.org/shamba](https://framavox.org/shamba/).
 
 ## DATA
 
