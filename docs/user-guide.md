@@ -70,9 +70,14 @@ Then to enable a smooth debugging experience:
 
 2- navigate to the shamba source code folder
 
-3- start vscode from the command line: ```%VSCODE_PATH%/vscode .```
+3- start vscode from the command line: ```%VSCODE_PATH%/code .```
 
 4- choose the appropriate Python interpreter in vscode (bottom left in the status bar)
+You should choose something like ```Python 3.7.8 64-bit ('myenv':conda)```
+
+5- open the ```shamba/shamba_cl_.py``` file in the editor
+
+6- then hit F5 key of your keyboard or go in "Run -> Start Debugging" menu
 
 For any issue please go to vscode user manual website : <https://code.visualstudio.com/docs/python/python-tutorial>
 
