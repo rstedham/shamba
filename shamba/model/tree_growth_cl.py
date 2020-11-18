@@ -187,12 +187,12 @@ class TreeGrowth(object):
         
         age_input = ['sp2_age1','sp2_age2','sp2_age3','sp2_age4','sp2_age5','sp2_age6']
         age = {key: dictionary[key] for key in age_input}
-        age = np.array(age.values(),dtype=float)
+        age = np.array(list(age.values())).astype(float) 
         age = np.array(sorted(age, key=int))
                 
         diam_input = ['sp2_diam1','sp2_diam2','sp2_diam3','sp2_diam4','sp2_diam5','sp2_diam6']
         diam = {key: dictionary[key] for key in diam_input}
-        diam = np.array(diam.values(),dtype=float)
+        diam = np.array(list(diam.values())).astype(float)
                 
         params = {
         'age': age,
@@ -243,7 +243,7 @@ class TreeGrowth(object):
         
         age_input = ['sp3_age1','sp3_age2','sp3_age3','sp3_age4','sp3_age5','sp3_age6']
         age = {key: dictionary[key] for key in age_input}
-        age = np.array(list(age.values())).astype(float)
+        age = np.array(list(age.values())).astype(float) 
         age = np.array(sorted(age, key=int))
                 
         diam_input = ['sp3_diam1','sp3_diam2','sp3_diam3','sp3_diam4','sp3_diam5','sp3_diam6']
