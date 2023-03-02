@@ -1,6 +1,6 @@
 import numpy as np
 
-from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.image
 from matplotlib.figure import Figure
 from matplotlib.patches import Polygon
@@ -96,18 +96,18 @@ class PlotWidget(FigureCanvas):
         for c in self.totals:
             models[self.totals[c][0]] = self.totals[c][1:]
         ms = sorted(models.keys())
-        
+
         years =  self.axes.dataLim.get_points()[1,0]
         outstr = "Total Emissions/Removals\nover %d years " % cfg.N_ACCT
         outstr += "(t CO"+SUB_2+"e / ha):\n"
         for m in ms:
             outstr += '%s: %.1f\n' % (m, models[m][0])
-        
+
         # Figure out total of project - baseline for each project
         if len(self.totals)>1 and 0 in self.totals:
             outstr+="\nNet impact (t CO"+SUB_2+"e / ha):\n"
             for c in self.totals:
-                if c == 0: 
+                if c == 0:
                     continue
                 outstr += "%s: %.1f\n" % (
                         self.totals[c][0],
@@ -126,7 +126,7 @@ class PlotWidget(FigureCanvas):
                 self.have_range.remove(plotID)
             self.updateLegend()
             self.updateTotals()
-        
+
 
     def updateLegend(self):
         if len(self.plots.keys())>0:
@@ -141,7 +141,7 @@ class PlotWidget(FigureCanvas):
 
     def saveFigure(self,fname):
         self.fig.savefig(fname)
-                
+
 
     def sizeHint(self):
         w = self.fig.get_figwidth()
